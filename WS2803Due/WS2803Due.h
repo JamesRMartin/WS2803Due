@@ -4,11 +4,11 @@
 * See the file LICENSE.txt for copying permission.
 *
 *
-* File: WS2803.h
-* Title: WS2803 Header
+* File: WS2803Due.h
+* Title: WS2803Due Header
 * Author: James Martin
 * Contact: vwgogreen@gmail.com
-* Date: 02/24/2013
+* Date: 02/28/2013
 * Description: Open source library used to control RGB LED strips that are
 *              driven by WS2803 LED driver chip(s).  Common methods are
 *              implemented in order to easily set, update, and display 
