@@ -1,3 +1,24 @@
+/**
+* Copyright (c)  2013 ICRL
+*
+* See the file LICENSE.txt for copying permission.
+*
+*
+* File: WS2803.h
+* Title: WS2803 Header
+* Author: James Martin
+* Contact: vwgogreen@gmail.com
+* Date: 02/24/2013
+* Description: Open source library used to control RGB LED strips that are
+*              driven by WS2803 LED driver chip(s).  Common methods are
+*              implemented in order to easily set, update, and display 
+*              user defined patterns.
+* Detailed Information:  See the file README for detailed description,
+*              implementation, system requirements, installation, method
+*              definitions, and useful links.
+*
+**/
+
 #if (ARDUINO >= 100)
  #include <Arduino.h>
 #else
@@ -8,30 +29,48 @@
 class WS2803Due {
 
  public:
-  WS2803Due(uint16_t numChips, uint8_t clock, bool timing); // SPI only
-  WS2803DueWS2803Due(uint16_t numChips, uint16_t numPixels,  uint8_t clock, bool timing) // SPI only
-  //WS2803Due(unit16_t numChips, bool thread, uint8_t clockDiv); //SPI without the delay built in.
-  //WS2803Due(void); // Empty constructor
+  WS2803Due();
+  WS2803Due(uint16_t numChips, uint8_t clock, bool latching);
+  WS2803Due(uint16_t numChips, uint16_t numPixels,  uint8_t clock, bool latching);
+
   void
     begin(void),
-    show(void),
-    setPixelColor(uint16_t ledNum, uint8_t ledBrightness),
-	setPixelColor(uint16_t pixelNum, uint8_t red, uint8_t green, uint8_t blue);
+	setClockDiv(uint8_t clock),
+	setExtLatching(bool latching),
+    setLEDColor(uint16_t ledNum, uint8_t ledBrightness),
+	setNumChips(uint16_t numChips),
+	setNumLEDs(uint16_t numLEDs),
+	setNumPixels(uint16_t numPixels),
+	setPixelColor(uint16_t numPixels, uint8_t red, uint8_t green, uint8_t blue),
+	show(void);
+	
+  uint8_t
+    getClockDiv(void);
 
-  uint8_t *p;
+  uint16_t
+    getNumChips(void),
+	getNumLEDs(void),
+	getNumPixels(void);
+	
+
+  bool
+    getExtLatching(void);
+
 
  private:
-	int totalChips;
-	int tmpOffset;
 	
   uint16_t
     totalPixels,
-	totalLEDs;
+	totalLEDs,
+    totalChips;
+
   uint8_t
     clockDiv,
-    *pixels; // Holds color values for each LED (3 bytes each)
+    *pixelData;
+
   void
-    allocateMem();
-  boolean
-    externalTiming;   
+    allocateMem(void);
+
+  bool
+    externalLatching;   
 };
