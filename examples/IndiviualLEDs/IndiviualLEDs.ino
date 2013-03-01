@@ -13,8 +13,6 @@
 WS2803Due strip = WS2803Due(); 
 void setup(){
   Serial.begin(115200);
-  
-  pinMode(ledDriver, OUTPUT);
   strip.setNumLEDs(108);
   strip.setNumChips(6);
   strip.setClockDiv(3);
