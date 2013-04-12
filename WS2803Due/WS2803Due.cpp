@@ -169,8 +169,14 @@ void WS2803Due::setPixelColor(uint16_t pixelNum, uint8_t red, uint8_t green, uin
 	 uint16_t chipContainer;
 	 uint16_t ledNum;
 
-	 pixelOffset = ((pixelNum-1)%totalChips);
-	 chipContainer = ((pixelNum-1)/totalChips)+1;
+	i(totalChips > 1){
+		pixelOffset = ((pixelNum-1)%totalChips);
+		chipContainer = ((pixelNum-1)/totalChips)+1;
+	 }else{
+		 pixelOffset = pixelNum-1;
+	 chipContainer = 1;
+	 }
+
 	 ledNum = (totalChips-chipContainer)*18+pixelOffset*3;
 	 uint8_t *storeRed = &pixelData[ledNum];
      *storeRed = red;
